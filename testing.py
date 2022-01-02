@@ -1,5 +1,7 @@
 import GEOparse
 import json
+import gzip
+import os
 
 with open('GEOnum.json') as f:
 	data = json.load(f)
@@ -26,4 +28,19 @@ with open('GEOnum.json') as f:
 		# Supplementary file download links
 		if 'supplementary_file' in gse.metadata:
 			print('Supplementary files: %s' % gse.metadata['supplementary_file'])
+		
+folder = './GSE/'
+extension = ".gz"
+
+files = os.listdir(folder)
+for item in files:
+	print("item is: ")
+	print(item)
+	if item.endswith(extension):
+		softFile = gzip.open( folder + item, 'rb')
+		f = open(softFile, "r")
+		content = f.read()
+		print(content)
+
+		
 		
